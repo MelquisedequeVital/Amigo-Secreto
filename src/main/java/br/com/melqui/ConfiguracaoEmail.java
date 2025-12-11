@@ -7,18 +7,16 @@ public class ConfiguracaoEmail {
     // Configurações do Servidor SMTP
     private final String host;
     private final String port;
-    private final boolean useSsl;
 
     // Credenciais (Autenticação)
     private final String username;
     private final String password;
 
-    public ConfiguracaoEmail(String host, String port, String username, String password, boolean useSsl) {
+    public ConfiguracaoEmail(String host, String port, String username, String password) {
         this.host = host;
         this.port = port;
         this.username = username;
         this.password = password;
-        this.useSsl = useSsl;
     }
 
     // Getters para uso pelo Authenticator
@@ -43,14 +41,14 @@ public class ConfiguracaoEmail {
         props.put("mail.smtp.port", this.port);
         props.put("mail.smtp.auth", "true");
 
-        // Lógica de Segurança (STARTTLS vs SSL)
-        if (this.useSsl) {
-            // Configuração para SSL (geralmente porta 465)
+        if ("465".equals(this.port)) {
+            // Configuração para SSL (porta 465)
             props.put("mail.smtp.socketFactory.port", this.port);
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.ssl.enable", "true");
+            
         } else {
-            // Configuração para STARTTLS (geralmente porta 587)
+            // Configuração para STARTTLS (porta 587 e outras)
             props.put("mail.smtp.starttls.enable", "true");
         }
 
