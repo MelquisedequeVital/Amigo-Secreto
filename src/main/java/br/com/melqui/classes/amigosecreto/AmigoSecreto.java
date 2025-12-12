@@ -6,12 +6,12 @@ import java.util.Random;
 import java.util.Set;
 
 public class AmigoSecreto {
-    private String[] participantes;
-    private ArrayList<String> participanteSorteados;
-    private Hashtable<String,String> amigoSecreto;
+    private Participante[] participantes;
+    private ArrayList<Participante> participanteSorteados;
+    private Hashtable<Participante,Participante> amigoSecreto;
     private Random randomizador = new Random();
 
-    public AmigoSecreto(String[] pessoas) {
+    public AmigoSecreto(Participante[] pessoas) {
         this.participantes = pessoas;
         this.participanteSorteados = new ArrayList<>();
         this.amigoSecreto = new Hashtable<>();
@@ -19,9 +19,9 @@ public class AmigoSecreto {
 
 
     public void sorteiaAmigoSecreto(){
-        for (String pessoa : participantes) {
+        for (Participante pessoa : participantes) {
             int numeroSorteado = randomizador.nextInt(participantes.length);
-            String participanteSorteado = participantes[numeroSorteado];
+            Participante participanteSorteado = participantes[numeroSorteado];
 
             while(pessoa.equals(participanteSorteado) || isRepetido(participanteSorteado)){
                 numeroSorteado = randomizador.nextInt(participantes.length);
@@ -34,14 +34,14 @@ public class AmigoSecreto {
         }
     }
 
-    public String getAmigoSecreto(String pessoa){
+    public String getAmigoSecreto(Participante pessoa){
         if(!amigoSecreto.contains(pessoa)){
             throw new IllegalArgumentException("Pessoa não identificada");
         }
-        return amigoSecreto.get(pessoa);
+        return amigoSecreto.get(pessoa).toString();
     }
 
-    private boolean isRepetido(String pessoa){
+    private boolean isRepetido(Participante pessoa){
         boolean repete = false;
         if(this.participanteSorteados.isEmpty()){
                 return repete;
@@ -55,9 +55,9 @@ public class AmigoSecreto {
     @Override
     public String toString(){
         String sorteadoString = "";
-        Set<String> keys = amigoSecreto.keySet();
-        for (String key: keys) {
-            sorteadoString = sorteadoString + key + ":" + amigoSecreto.get(key) + "\n";
+        Set<Participante> keys = amigoSecreto.keySet();
+        for (Participante key: keys) {
+            sorteadoString = sorteadoString + key.toString() + ":" + amigoSecreto.get(key).toString() + "\n";
         }
         return sorteadoString;
     }

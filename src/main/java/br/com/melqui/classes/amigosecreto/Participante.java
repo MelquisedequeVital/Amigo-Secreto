@@ -1,8 +1,9 @@
 package br.com.melqui.classes.amigosecreto;
 
 public class Participante {
-    String nome;
-    String email;
+
+    private String nome;
+    private String email;
 
     public Participante(String nome, String email) {
         this.nome = nome;
@@ -25,7 +26,24 @@ public class Participante {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object outraPessoa) {
+        if (this == outraPessoa) {
+            return true;
+        }
 
+        if (outraPessoa == null || !(outraPessoa instanceof Participante)) {
+            return false;
+        }
 
-    
+        Participante outroParticipante = (Participante) outraPessoa;
+
+        return this.nome.equals(outroParticipante.getNome());
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }
