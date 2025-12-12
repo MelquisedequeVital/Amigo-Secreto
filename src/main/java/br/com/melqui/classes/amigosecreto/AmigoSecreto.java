@@ -1,4 +1,4 @@
-package br.com.melqui;
+package br.com.melqui.classes.amigosecreto;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

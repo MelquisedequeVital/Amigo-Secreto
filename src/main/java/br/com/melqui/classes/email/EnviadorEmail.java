@@ -1,4 +1,4 @@
-package br.com.melqui;
+package br.com.melqui.classes.email;
 
 import java.util.Properties;
 
